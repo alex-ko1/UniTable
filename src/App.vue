@@ -1,7 +1,7 @@
 <template>
   <main>
     <div class="wrapper">
-      <uni-table :cols="cols" :rows="rows" :rows2="rows2" />
+      <uni-table :cols="cols" :rows="rows" />
     </div>
   </main>
 </template>
@@ -45,49 +45,18 @@ export default defineComponent({
           key: "isAdmin",
           component: { tag: "input", type: "checkbox", disabled: true },
         },
-        {
-          title: "new column",
-          key: "newCol",
-          component: { tag: "input", type: "checkbox" },
-        },
-        {
-          title: "new column2",
-          key: "newCol2",
-          component: { type: "label", color: "green" },
-        },
+        // {
+        //   title: "new column",
+        //   key: "newCol",
+        //   component: { tag: "input", type: "checkbox" },
+        // },
+        // {
+        //   title: "new column2",
+        //   key: "newCol2",
+        //   component: { type: "label", color: "green" },
+        // },
       ],
       rows: [
-        {
-          name: "Andrew",
-          email: "andrew@gmail.com",
-          isAdmin: true,
-          component: {
-            labelColor: "red",
-            options: ["Active", "Pending", "inActive"],
-          },
-        },
-        {
-          name: "Alex",
-          isAdmin: false,
-          component: {
-            labelColor: "green",
-            options: ["Pending", "Active", "inActive"],
-          },
-        },
-        {
-          name: "Oleg",
-          email: "Oleg@gmail.com",
-          isAdmin: false,
-          component: {
-            labelColor: "blue",
-            options: ["inActive", "Active", "Pending"],
-            selDisabled: true,
-            inputDisabled: true,
-            CheckboxDisabled: true,
-          },
-        },
-      ],
-      rows2: [
         {
           name: {
             key: "name",
@@ -105,9 +74,9 @@ export default defineComponent({
             key: "isAdmin",
             value: true,
           },
-          newCol: {
-            value: true,
-          },
+          // newCol: {
+          //   value: true,
+          // },
         },
         {
           name: {
@@ -158,9 +127,9 @@ export default defineComponent({
             key: "isAdmin",
             value: true,
           },
-          newCol2: {
-            value: "Like potato and Coca Cola",
-          },
+          // newCol2: {
+          //   value: "Like potato and Coca Cola",
+          // },
         },
       ],
     };

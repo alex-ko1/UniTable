@@ -1,44 +1,4 @@
 <template>
-  <!-- <table class="table">
-    <thead>
-      <tr>
-        <th
-          v-for="(col, i) in cols"
-          :key="i"
-          :class="{ sortable: col.sortable }"
-          @click="sortable"
-        >
-          {{ col.title }}
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="(row, i) in rows" :key="i">
-        <td class="name" :style="{ color: row.component.labelColor }">
-          {{ i + 1 }}. {{ row.name }}
-        </td>
-        <td>
-          <my-select
-            :options="row.component.options"
-            :disabled="row.component.selDisabled"
-          />
-        </td>
-        <td>
-          <my-email
-            :value="row.email"
-            :disabled="row.component.inputDisabled"
-          />
-        </td>
-        <td>
-          <my-checkbox
-            :checked="row.isAdmin"
-            :disabled="row.component.CheckboxDisabled"
-          />
-        </td>
-      </tr>
-    </tbody>
-  </table> -->
-
   <br />
   <table class="table">
     <thead>
@@ -48,7 +8,7 @@
           v-for="(col, i) in cols"
           :key="i"
           :class="{ sortable: col.sortable }"
-          @click="col.sortable && sortable(rows2, col.key)"
+          @click="col.sortable && sortable(rows, col.key)"
           ref="sorting"
         >
           {{ col.title }}
@@ -56,7 +16,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(row, rowI) in rows2" :key="rowI">
+      <tr v-for="(row, rowI) in rows" :key="rowI">
         <td>{{ rowI + 1 }}.</td>
         <td v-for="(col, colI) in cols" :key="colI">
           <component
@@ -65,35 +25,13 @@
             v-bind="{ props: col.component }"
           />
         </td>
-
-        <!-- <td class="name" :style="{ color: row.name.props.labelColor }">
-          {{ i + 1 }}. {{ row.name.value }}
-        </td>
-        <td>
-          <my-select
-            :options="row.status.props.options"
-            :disabled="row.status.props.selDisabled"
-          />
-        </td>
-        <td>
-          <my-email
-            :value="row.email?.value"
-            :disabled="row.email?.props.inputDisabled"
-          />
-        </td>
-        <td>
-          <my-checkbox
-            :checked="row.isAdmin.value"
-            :disabled="row.isAdmin.props.checkboxDisabled"
-          />
-        </td> -->
       </tr>
     </tbody>
   </table>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent } from "vue";
 import type { PropType } from "vue";
 import MySelect from "./MySelect.vue";
 import MyEmail from "./MyEmail.vue";
@@ -105,11 +43,6 @@ interface Column {
   key: String;
   sortable?: Boolean;
   component: Label | Select | Input | Checkbox;
-}
-interface Row {
-  name: string;
-  email?: string;
-  isAdmin: boolean;
 }
 interface Component {
   type: string;
@@ -129,7 +62,7 @@ interface Checkbox extends Component {
   checkboxDisabled?: boolean;
 }
 
-interface Row2 {
+interface Row {
   [key: string]: any;
   name: {
     key: string;
@@ -168,13 +101,10 @@ export default defineComponent({
     rows: {
       type: Array as PropType<Row[]>,
     },
-    rows2: {
-      type: Array as PropType<Row2[]>,
-    },
   },
   methods: {
     sortable(rows: any, sortField: any) {
-      rows.sort((a: Row2, b: Row2) => {
+      rows.sort((a: Row, b: Row) => {
         return a[`${sortField}`].value.localeCompare(b[`${sortField}`].value);
       });
     },

@@ -7,9 +7,8 @@
         <th
           v-for="(col, i) in cols"
           :key="i"
-          :class="{ sortable: col.sortable }"
+          :class="[{ sortable: col.sortable }, 'col-' + col.key]"
           @click="col.sortable && sortable(rows, col.key)"
-          ref="sorting"
         >
           {{ col.title }}
         </th>
@@ -18,7 +17,8 @@
     <tbody>
       <tr v-for="(row, rowI) in rows" :key="rowI">
         <td>{{ rowI + 1 }}.</td>
-        <td v-for="(col, colI) in cols" :key="colI">
+
+        <td v-for="(col, colI) in cols" :key="colI" :class="'cell-' + col.key">
           <component
             :value="row[`${col.key}`]?.value"
             :is="'my-' + col.component.type"
@@ -65,22 +65,23 @@ interface Checkbox extends Component {
 interface Row {
   [key: string]: any;
   name: {
-    key: string;
+    key?: string;
     value: string;
   };
   status: {
-    key: string;
+    key?: string;
     value: string;
   };
   email?: {
-    key: string;
+    key?: string;
     value?: string;
   };
   isAdmin: {
-    key: string;
+    key?: string;
     value: boolean;
   };
   newCol?: {
+    key?: string;
     value: boolean;
   };
   newCol2?: {
@@ -91,9 +92,6 @@ interface Row {
 
 export default defineComponent({
   components: { MySelect, MyEmail, MyCheckbox, MyLabel },
-  data() {
-    return {};
-  },
   props: {
     cols: {
       type: Array as PropType<Column[]>,
@@ -117,8 +115,13 @@ export default defineComponent({
   cursor: pointer;
 }
 .sortable::after {
-  content: " \25BC";
+  /* content: "\25B3\a\25BD"; */
+  content: "\25BC";
+  white-space: pre;
+  display: inline-block;
   font-size: 12px;
+  line-height: 1;
+  vertical-align: middle;
 }
 
 .table {

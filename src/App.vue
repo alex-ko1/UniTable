@@ -37,7 +37,7 @@ export default defineComponent({
           component: {
             tag: "input",
             type: "email",
-            disabled: true,
+            // disabled: true,
           },
         },
         {

@@ -43,7 +43,7 @@ describe("unitable", () => {
           {
             name: {
               key: "name",
-              value: "Alex",
+              value: "Andrew",
             },
             status: {
               key: "status",
@@ -51,7 +51,7 @@ describe("unitable", () => {
             },
             email: {
               key: "email",
-              value: "alex@gmail.com",
+              value: "andrew@gmail.com",
             },
             isAdmin: {
               key: "isAdmin",
@@ -64,7 +64,7 @@ describe("unitable", () => {
           {
             name: {
               key: "name",
-              value: "Andrew",
+              value: "Alex",
             },
             status: {
               key: "status",
@@ -72,7 +72,7 @@ describe("unitable", () => {
             },
             email: {
               key: "email",
-              value: "andrew@gmail.com",
+              value: "alex@gmail.com",
             },
             isAdmin: {
               key: "isAdmin",
@@ -87,12 +87,15 @@ describe("unitable", () => {
     });
     cy.wait(2000);
     cy.get('tbody tr:first-child input[type="email"]')
-      .should("have.value", "alex@gmail.com")
-      .type("hello");
+      .should("have.value", "andrew@gmail.com")
+      .clear()
+      .type("hello@gmail.com");
     cy.get("tbody tr:first-child .cell-isAdmin input").should("not.be.checked");
     cy.get("tbody tr:first-child .cell-newCol input")
       .should("not.be.disabled")
       .click();
     cy.get("tbody tr:last-child .cell-status select").select("Pending");
+    cy.wait(500);
+    cy.get(".sortable").click();
   });
 });

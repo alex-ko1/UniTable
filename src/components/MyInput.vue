@@ -19,6 +19,7 @@ export default defineComponent({
       type: Object,
     },
   },
+  methods: {},
 });
 </script>
 

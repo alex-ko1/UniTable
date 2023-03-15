@@ -11,6 +11,11 @@ export default defineComponent({
       type: Object,
     },
   },
+  // methods: {
+  //   changeInput(event: Event) {
+  //     this.$emit("changeInput", event);
+  //   },
+  // },
 });
 </script>
 
